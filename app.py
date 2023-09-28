@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 from db import GroceryDB
 
 
@@ -10,21 +10,35 @@ db = GroceryDB()
 @app.route('/grocery')
 def all_grocery():
     """Get all grocery"""
-    pass
+    groceries = db.all()
+
+    return jsonify(groceries)
 
 
 # view add grocery
-@app.route('/grocery/add', methods=['POST'])
+@app.route('/grocery/add')
 def add_grocery():
     """Add a grocery"""
-    pass
+    if request.method == 'POST':
+    
+        body = request.get_json()
+        
+        db.add(body)
+
+        return jsonify({'message': 'succefully added.'})
+
+    else:
+        return jsonify({'message': 'method not allowed.'}), 404
 
 
 # view all grocery by type
 @app.route('/grocery/type/<type>')
 def all_grocery_by_type(type):
     """Get all grocery by type"""
-    pass
+    
+    groceries = db.get_by_type(type=type)
+
+    return jsonify(groceries)
 
 
 # view all grocery by name

@@ -209,6 +209,12 @@
             "quantity": 10,
             "price": 4.8,
             "type": "fruit"
+        },
+        "36": {
+            "name": "nok",
+            "quantity": 3,
+            "price": 4.2,
+            "type": "fruit"
         }
     }
 }
